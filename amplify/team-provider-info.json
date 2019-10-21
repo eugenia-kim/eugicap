@@ -1,0 +1,14 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "eugicap-prod-20191020163746-authRole",
+            "UnauthRoleArn": "arn:aws:iam::538470645456:role/eugicap-prod-20191020163746-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::538470645456:role/eugicap-prod-20191020163746-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "eugicap-prod-20191020163746-deployment",
+            "UnauthRoleName": "eugicap-prod-20191020163746-unauthRole",
+            "StackName": "eugicap-prod-20191020163746",
+            "StackId": "arn:aws:cloudformation:eu-west-2:538470645456:stack/eugicap-prod-20191020163746/9419b730-f34f-11e9-a3d5-0ab68d74e79c"
+        }
+    }
+}
