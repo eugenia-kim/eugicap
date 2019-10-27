@@ -9,6 +9,14 @@
             "UnauthRoleName": "eugicap-prod-20191020163746-unauthRole",
             "StackName": "eugicap-prod-20191020163746",
             "StackId": "arn:aws:cloudformation:eu-west-2:538470645456:stack/eugicap-prod-20191020163746/9419b730-f34f-11e9-a3d5-0ab68d74e79c"
+        },
+        "categories": {
+            "function": {},
+            "auth": {
+                "eugicap631fb273": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"355741725073991\",\"client_secret\":\"ae156be578704f07d786f05ad5c0626f\"}]"
+                }
+            }
         }
     }
 }

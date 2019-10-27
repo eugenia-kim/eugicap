@@ -8,55 +8,47 @@ import Submit from './submit/Submit';
 import { Route, BrowserRouter } from "react-router-dom";
 import Bet from './bet/Bet';
 //import SignUp from './login/Signup';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth, Hub } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+import { withAuthenticator, withOAuth } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
+import { CognitoUser } from '@aws-amplify/auth';
 
 Amplify.configure(awsconfig);
 
-const usernameAttributes = 'Username';
+interface AppState {
+  user: CognitoUser | null;
+  customState: any | null;
+}
+class App extends React.Component<{}, AppState> {
+  state: AppState = { user: null, customState: null };
+  componentDidMount() {
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      switch (event) {
+        case "signIn":
+          this.setState({ user: data });
+          break;
+        case "signOut":
+          this.setState({ user: null });
+          break;
+        case "customOAuthState":
+          this.setState({ customState: data });
+      }
+    });
 
-const signUpConfig = {
-  header: 'Welcome to EugiCap!',
-  hideAllDefaults: true,
-  defaultCountryCode: '44',
-  signUpFields: [
-    {
-      label: usernameAttributes,
-      key: 'username',
-      required: true,
-      displayOrder: 1,
-      type: 'string'
-    },
-    {
-      label: 'Password',
-      key: 'password',
-      required: true,
-      displayOrder: 2,
-      type: 'password'
-    },
-    {
-      label: 'PhoneNumber',
-      key: 'phone_number',
-      required: true,
-      displayOrder: 3,
-      type: 'string'
-    },
-    {
-      label: 'Email',
-      key: 'email',
-      required: true,
-      displayOrder: 4,
-      type: 'string'
-    }
-  ]
-};
+    Auth.currentAuthenticatedUser()
+      .then(user => this.setState({ user }))
+      .catch(() => console.log("Not signed in"));
+  }
 
-class App extends React.Component {
   public render() {
+    const { user } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
+          <button onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Facebook })}>Open Facebook</button>
+          <button onClick={() => Auth.signOut()}>Sign Out {user ? user.getUsername() : ""}</button>
+
           <Route exact path="/" component={Submit} />
           <Route exact path="/login" component={Login} />
           {/* <Route exact path="/signup" render={this.renderSignUp} /> */}
@@ -69,7 +61,4 @@ class App extends React.Component {
   // private renderSignUp = (props: any) => (<Submit {...props} />)
 }
 
-export default withAuthenticator(App, true, undefined, undefined, {
-  signUpConfig,
-  usernameAttributes
-});
+export default withOAuth(App);
