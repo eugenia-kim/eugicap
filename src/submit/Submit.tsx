@@ -102,17 +102,11 @@ class Submit extends React.Component<{}, ISubmitState> {
     //   console.log(body);
     //   this.setState({ url: body.id });
     // })
-    this.post(newBet)
+    API.post('eugicapBet', '/bet', newBet)
       .then((res) => {
         console.log(res);
         this.setState({ url: newBet.id });
       })
-  };
-
-  post = async (bet: BetModel) => {
-    console.log('calling api');
-    const response = await API.post('eugicapBet', '/bet', bet);
-    alert(JSON.stringify(response, null, 2));
   };
 }
 

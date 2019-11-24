@@ -72,14 +72,19 @@ class Bet extends React.Component<{} & RouteComponentProps, IBetState> {
     }
 
     private retrieveBet(id: string) {
-        fetch(`http://localhost:3001/bet/${id}`, {
-            headers: header,
-            method: "GET"
-        })
-            .then((res: Response) => res.json())
-            .then(body => {
-                console.log(body);
-                this.setState({ bet: new BetModel(body.id, body.author, body.bet, body.date) });
+        // fetch(`http://localhost:3001/bet/${id}`, {
+        //     headers: header,
+        //     method: "GET"
+        // })
+        //     .then((res: Response) => res.json())
+        //     .then(body => {
+        //         console.log(body);
+        //         this.setState({ bet: new BetModel(body.id, body.author, body.bet, body.date) });
+        //     })
+        API.get('eugicapBet', `/bet/object/${id}`, null)
+            .then((res) => {
+                console.log(res);
+                //this.setState({ bet: new BetModel(res.id, body.author, body.bet, body.date) });
             })
     };
 }
