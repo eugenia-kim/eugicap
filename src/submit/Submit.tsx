@@ -45,7 +45,7 @@ class Submit extends React.Component<ISubmitProps, ISubmitState> {
         <div className="Submit">
           <FormGroup
             helperText="e.g. I BET you will get married with Jane"
-            label="I BET..."
+            label="I BET.."
             labelFor="bet-input"
           >
             <TextArea
