@@ -60,10 +60,6 @@
 		}
 	},
 	"storage": {
-		"Bet": {
-			"service": "DynamoDB",
-			"providerPlugin": "awscloudformation"
-		},
 		"eugicapBet": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
