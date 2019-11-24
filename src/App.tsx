@@ -46,8 +46,7 @@ class App extends React.Component<{}, AppState> {
     return (
       <BrowserRouter>
         <div className="App">
-          {/* <button onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Facebook })}>Open Facebook</button> */}
-          <button onClick={() => Auth.federatedSignIn()}>Sign In</button>
+          <button onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Facebook })}>Open Facebook</button>
           <button onClick={() => Auth.signOut()}>Sign Out {user ? user.getUsername() : ""}</button>
 
           <Route exact path="/" component={Submit} />
