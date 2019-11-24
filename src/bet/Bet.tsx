@@ -84,7 +84,8 @@ class Bet extends React.Component<{} & RouteComponentProps, IBetState> {
         API.get('apiBet', `/bet/${id}`, null)
             .then((res) => {
                 console.log(res);
-                //this.setState({ bet: new BetModel(res.id, body.author, body.bet, body.date) });
+                const bet: BetModel = res[0];
+                this.setState({ bet: new BetModel(bet.id, bet.author, bet.bet, bet.date) });
             })
     };
 }
