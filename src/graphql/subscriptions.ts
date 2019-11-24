@@ -10,8 +10,8 @@ export const onCreateBet = `subscription OnCreateBet {
   }
 }
 `;
-export const onUpdateBet = `subscription OnUpdateBet {
-  onUpdateBet {
+export const onUpdateBet = `subscription OnUpdateBet($author: String!) {
+  onUpdateBet(author: $author) {
     id
     author
     bet
@@ -19,8 +19,8 @@ export const onUpdateBet = `subscription OnUpdateBet {
   }
 }
 `;
-export const onDeleteBet = `subscription OnDeleteBet {
-  onDeleteBet {
+export const onDeleteBet = `subscription OnDeleteBet($author: String!) {
+  onDeleteBet(author: $author) {
     id
     author
     bet
