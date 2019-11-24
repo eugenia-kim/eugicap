@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "eugicap",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "autheugicap631fb273",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

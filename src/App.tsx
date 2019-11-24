@@ -8,7 +8,7 @@ import Submit from './submit/Submit';
 import { Route, BrowserRouter } from "react-router-dom";
 import Bet from './bet/Bet';
 //import SignUp from './login/Signup';
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import Amplify, { Auth, Hub, Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { withAuthenticator, withOAuth } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';

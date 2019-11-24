@@ -1,0 +1,6 @@
+type Bet @model {
+  id: ID!
+  author: String!
+  bet: String
+  date: AWSDateTime
+}Y
