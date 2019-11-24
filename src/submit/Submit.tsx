@@ -8,6 +8,7 @@ import { BetModel } from '../models/BetModel';
 import "./Submit.css";
 import PageHeader from '../header/PageHeader';
 import { API } from "aws-amplify";
+import { CognitoUser } from "@aws-amplify/auth";
 
 
 export const header = {
@@ -15,13 +16,17 @@ export const header = {
   "Accept": "application/json"
 };
 
+export interface ISubmitProps {
+  user: CognitoUser | null;
+}
+
 export interface ISubmitState {
   textContent: string;
   date: Date
   url: string;
 }
 
-class Submit extends React.Component<{}, ISubmitState> {
+class Submit extends React.Component<ISubmitProps, ISubmitState> {
 
   public state: ISubmitState = {
     textContent: "",
@@ -91,7 +96,14 @@ class Submit extends React.Component<{}, ISubmitState> {
   private handleParseDate = (str: string) => new Date(str)
 
   private onSubmit = () => {
-    const newBet: BetModel = new BetModel(uuid(), "author", this.state.textContent, this.state.date);
+    let author: string;
+    if (!this.props.user) {
+      let temp = prompt('Who are you?', "Anonymous");
+      author = temp ? temp : "Anonymous"; //ts being stupid
+    } else {
+      author = this.props.user.getUsername();
+    }
+    const newBet: BetModel = new BetModel(uuid(), author, this.state.textContent, this.state.date);
     // fetch("http://localhost:3001/submit", {
     //   body: JSON.stringify(newBet),
     //   headers: header,

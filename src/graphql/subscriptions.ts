@@ -1,8 +1,8 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBet = `subscription OnCreateBet {
-  onCreateBet {
+export const onCreateBet = `subscription OnCreateBet($author: String!) {
+  onCreateBet(author: $author) {
     id
     author
     bet

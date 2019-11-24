@@ -46,7 +46,7 @@ class App extends React.Component<{}, AppState> {
     return (
       <BrowserRouter>
         <div className="App">
-          <Route exact path="/" component={Submit} />
+          <Route exact path="/" render={this.renderSubmit} />
           <Route exact path="/login" render={this.renderLogin} />
           {/* <Route exact path="/signup" render={this.renderSignUp} /> */}
           <Route path="/bet/:id" component={Bet} />
@@ -57,6 +57,7 @@ class App extends React.Component<{}, AppState> {
 
   // private renderSignUp = (props: any) => (<Submit {...props} />)
   private renderLogin = (props: any) => (<Login {...props} user={this.state.user} />)
+  private renderSubmit = (props: any) => (<Submit {...props} user={this.state.user} />)
 }
 
 export default withOAuth(App);

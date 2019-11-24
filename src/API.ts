@@ -131,6 +131,10 @@ export type ListBetsQuery = {
   } | null,
 };
 
+export type OnCreateBetSubscriptionVariables = {
+  author: string,
+};
+
 export type OnCreateBetSubscription = {
   onCreateBet:  {
     __typename: "Bet",
