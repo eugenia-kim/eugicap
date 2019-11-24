@@ -1,4 +1,8 @@
-type Bet @model {
+type Bet @model 
+  @auth(
+    rules: [
+      {allow: owner, ownerField: "author", operations: [update, delete]}
+    ]) {
   id: ID!
   author: String!
   bet: String
