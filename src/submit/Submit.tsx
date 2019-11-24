@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 import { BetModel } from '../models/BetModel';
 import "./Submit.css";
 import PageHeader from '../header/PageHeader';
+import { API } from "aws-amplify";
 
 
 export const header = {
@@ -91,16 +92,27 @@ class Submit extends React.Component<{}, ISubmitState> {
 
   private onSubmit = () => {
     const newBet: BetModel = new BetModel(uuid(), "author", this.state.textContent, this.state.date);
-    fetch("http://localhost:3001/submit", {
-      body: JSON.stringify(newBet),
-      headers: header,
-      method: "POST"
-    })
-      .then((res: Response) => res.json())
-      .then(body => {
-        console.log(body);
-        this.setState({ url: body.id });
+    // fetch("http://localhost:3001/submit", {
+    //   body: JSON.stringify(newBet),
+    //   headers: header,
+    //   method: "POST"
+    // })
+    // .then((res: Response) => res.json())
+    // .then(body => {
+    //   console.log(body);
+    //   this.setState({ url: body.id });
+    // })
+    this.post(newBet)
+      .then((res) => {
+        console.log(res);
+        this.setState({ url: newBet.id });
       })
+  };
+
+  post = async (bet: BetModel) => {
+    console.log('calling api');
+    const response = await API.post('eugicapBet', '/bet', bet);
+    alert(JSON.stringify(response, null, 2));
   };
 }
 

@@ -110,10 +110,10 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
-  hostedUIProviderCreds:
+  oAuthMetadata:
     Type: String
               
-  oAuthMetadata:
+  hostedUIProviderCreds:
     Type: String
             
 Conditions:

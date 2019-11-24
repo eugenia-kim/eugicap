@@ -3,4 +3,4 @@ type Bet @model {
   author: String!
   bet: String
   date: AWSDateTime
-}Y
+}

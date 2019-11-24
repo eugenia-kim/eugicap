@@ -1,0 +1,45 @@
+{
+    "paths": [
+        {
+            "name": "/bet",
+            "lambdaFunction": "eugicapBet",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET"
+                ]
+            }
+        }
+    ],
+    "resourceName": "apiBet",
+    "apiName": "apiBet",
+    "functionArns": [
+        {
+            "lambdaFunction": "eugicapBet"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "eugicap-prod-20191020163746-authRole",
+        "unAuthRoleName": "eugicap-prod-20191020163746-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "eugicapBet",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

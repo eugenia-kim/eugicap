@@ -1,0 +1,7 @@
+{
+    "tableName": "eugicapBet",
+    "partitionKeyName": "id",
+    "partitionKeyType": "S",
+    "sortKeyName": "author",
+    "sortKeyType": "S"
+}

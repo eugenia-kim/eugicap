@@ -1,0 +1,12 @@
+{
+    "permissions": {
+        "auth": {
+            "eugicap631fb273": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        }
+    }
+}

@@ -5,7 +5,30 @@
 			"providerPlugin": "awscloudformation"
 		}
 	},
-	"function": {},
+	"function": {
+		"eugicapBet": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "eugicapBet",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				},
+				{
+					"category": "auth",
+					"resourceName": "eugicap631fb273",
+					"attributes": [
+						"UserPoolId"
+					]
+				}
+			]
+		}
+	},
 	"auth": {
 		"eugicap631fb273": {
 			"service": "Cognito",
@@ -20,6 +43,30 @@
 			"output": {
 				"securityType": "AMAZON_COGNITO_USER_POOLS"
 			}
+		},
+		"apiBet": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "eugicapBet",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"storage": {
+		"Bet": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"eugicapBet": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
 		}
 	}
 }

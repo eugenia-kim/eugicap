@@ -1,6 +1,6 @@
 {
     "identityPoolName": "eugicap631fb273_identitypool_631fb273",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "eugica631fb273",
     "userPoolName": "eugicap631fb273_userpool_631fb273",
     "autoVerifiedAttributes": [

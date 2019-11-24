@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { BetModel } from '../models/BetModel';
 import Countdown from 'react-countdown-now';
 import './Bet.css'
+import Amplify, { Analytics, Storage, API } from 'aws-amplify';
 
 export const header = {
     "Content-Type": "application/json",
@@ -81,7 +82,6 @@ class Bet extends React.Component<{} & RouteComponentProps, IBetState> {
                 this.setState({ bet: new BetModel(body.id, body.author, body.bet, body.date) });
             })
     };
-
 }
 
 export default Bet;
