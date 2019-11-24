@@ -15,7 +15,7 @@ class PageHeader extends React.PureComponent<RouteComponentProps<{}> & IPageHead
     }
 
     private handleLoginClick = () => {
-        this.props.history.push('/signup');
+        this.props.history.push('/login');
     }
 
     private handleLogoutClick = () => {

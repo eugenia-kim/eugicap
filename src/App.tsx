@@ -46,11 +46,8 @@ class App extends React.Component<{}, AppState> {
     return (
       <BrowserRouter>
         <div className="App">
-          <button onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Facebook })}>Open Facebook</button>
-          <button onClick={() => Auth.signOut()}>Sign Out {user ? user.getUsername() : ""}</button>
-
           <Route exact path="/" component={Submit} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login" render={this.renderLogin} />
           {/* <Route exact path="/signup" render={this.renderSignUp} /> */}
           <Route path="/bet/:id" component={Bet} />
         </div>
@@ -59,6 +56,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   // private renderSignUp = (props: any) => (<Submit {...props} />)
+  private renderLogin = (props: any) => (<Login {...props} user={this.state.user} />)
 }
 
 export default withOAuth(App);
