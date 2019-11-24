@@ -9,7 +9,8 @@ import "./Submit.css";
 import PageHeader from '../header/PageHeader';
 import { API } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
-
+import * as _ from "lodash";
+import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 
 export const header = {
   "Content-Type": "application/json",
@@ -96,13 +97,20 @@ class Submit extends React.Component<ISubmitProps, ISubmitState> {
   private handleParseDate = (str: string) => new Date(str)
 
   private onSubmit = () => {
-    let author: string;
     if (!this.props.user) {
       let temp = prompt('Who are you?', "Anonymous");
-      author = temp ? temp : "Anonymous"; //ts being stupid
+      this.postBet(temp ? temp : "Anonymous");
     } else {
-      author = this.props.user.getUsername();
+      this.props.user.getUserAttributes((err, attributes) => {
+        if(attributes) {
+          let name = _.filter(attributes, (attribute: CognitoUserAttribute) => attribute.getName() === "name").getValue();
+          this.postBet(name);
+        }
+      });
     }
+  };
+
+  private postBet(author: String) {
     const newBet: BetModel = new BetModel(uuid(), author, this.state.textContent, this.state.date);
     // fetch("http://localhost:3001/submit", {
     //   body: JSON.stringify(newBet),
@@ -121,7 +129,7 @@ class Submit extends React.Component<ISubmitProps, ISubmitState> {
         console.log(res);
         this.setState({ url: newBet.id });
       })
-  };
+  }
 }
 
 export default Submit;
