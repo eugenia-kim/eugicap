@@ -2,7 +2,7 @@ projects:
   eugicap:
     schemaPath: src/graphql/schema.json
     includes:
-      - src/graphql/bet.ts
+      - src/graphql/*.ts
     excludes:
       - ./amplify/**
     extensions:
