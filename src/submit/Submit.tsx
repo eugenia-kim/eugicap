@@ -102,9 +102,9 @@ class Submit extends React.Component<ISubmitProps, ISubmitState> {
       this.postBet(temp ? temp : "Anonymous");
     } else {
       this.props.user.getUserAttributes((err, attributes) => {
-        if(attributes) {
-          let name = _.filter(attributes, (attribute: CognitoUserAttribute) => attribute.getName() === "name").getValue();
-          this.postBet(name);
+        if (attributes) {
+          let nameAttribute = _.find(attributes, (attribute: CognitoUserAttribute) => attribute.getName() === "name");
+          this.postBet(nameAttribute ? nameAttribute.getValue() : "invalid user");
         }
       });
     }
